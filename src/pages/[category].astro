@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layout/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => {
+    return data.draft !== true;
+  });
+
+  // Get all unique categories
+  const uniqueCategories = [...new Set(allPosts.map((post) => post.data.category))];
+
+  // Map categories to descriptions (Optional: You can customize these)
+  const descriptions = {
+    'Tech': "The architecture of our new reality.",
+    'Psychology': "Understanding the ghost in the machine.",
+    'Economics': "The invisible hand in a digital world.",
+    'Philosophy': "The microscope of thought."
+  };
+
+  return uniqueCategories.map((category) => {
+    // Create a slug for the URL (e.g., "Tech" -> "tech")
+    const slug = category.toLowerCase();
+    
+    // Filter posts for this specific category
+    const categoryPosts = allPosts.filter((post) => post.data.category === category);
+    
+    // Sort by date (newest first)
+    const sortedPosts = categoryPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return {
+      params: { category: slug },
+      props: { 
+        categoryName: category, 
+        posts: sortedPosts,
+        description: descriptions[category] || "Curated essays and thoughts."
+      },
+    };
+  });
+}
+
+const { categoryName, posts, description } = Astro.props;
+
+// Isolate the newest post for the "Hero" slot
+const featuredPost = posts[0];
+const remainingPosts = posts.slice(1);
+---
+
+<BaseLayout title={`${categoryName} - Ishtiak Saad`}>
+  
+  <section class="py-20 border-b border-editorial-border mb-16">
+    <div class="grid grid-cols-12 gap-8 items-end">
+      <div class="col-span-12 lg:col-span-8">
+        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted mb-4 block">
+            Collection
+        </span>
+        <h1 class="text-6xl md:text-8xl font-serif font-bold text-editorial-text tracking-tight capitalize">
+          {categoryName}
+        </h1>
+      </div>
+      <div class="col-span-12 lg:col-span-4 lg:pb-2">
+        <p class="text-xl md:text-2xl text-editorial-muted font-light italic font-serif leading-relaxed border-l border-editorial-accent pl-6">
+          {description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-32">
+    
+    {featuredPost && (
+        <article class="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-b border-editorial-border/30 pb-16">
+            <div class="col-span-12 lg:col-span-8">
+                <a href={`/posts/${featuredPost.slug}`} class="group block">
+                    <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-4 font-sans">
+                        <span>{featuredPost.data.pubDate.toLocaleDateString()}</span>
+                        <span class="w-1 h-[1px] bg-editorial-border"></span>
+                        <span>Latest Essay</span>
+                    </div>
+                    <h2 class="text-5xl md:text-6xl font-serif font-bold text-editorial-text group-hover:text-editorial-text/70 transition-colors mb-6 leading-tight">
+                        {featuredPost.data.title}
+                    </h2>
+                    <p class="text-xl text-editorial-muted font-serif leading-relaxed max-w-3xl">
+                        {featuredPost.data.description}
+                    </p>
+                    <div class="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-editorial-text group-hover:text-editorial-accent transition-colors font-sans">
+                        Read Article <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </a>
+            </div>
+            <div class="hidden lg:block lg:col-span-4 border border-editorial-border p-8 bg-white h-full">
+                <span class="text-6xl font-serif text-editorial-border/50 font-bold">01</span>
+                <div class="mt-auto pt-12">
+                     <p class="text-xs font-bold uppercase tracking-widest text-editorial-muted mb-2">Reading Time</p>
+                     <p class="font-serif italic text-lg">8 Minutes</p>
+                </div>
+            </div>
+        </article>
+    )}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+      {remainingPosts.map((post) => (
+        <article class="flex flex-col group h-full justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-4 font-sans">
+                <time>{post.data.pubDate.toLocaleDateString()}</time>
+            </div>
+            
+            <a href={`/posts/${post.slug}`} class="block">
+              <h3 class="text-3xl font-serif font-bold text-editorial-text group-hover:underline decoration-1 underline-offset-4 decoration-editorial-accent mb-4 leading-snug">
+                {post.data.title}
+              </h3>
+            </a>
+            
+            <p class="text-editorial-muted font-serif text-sm leading-relaxed line-clamp-3">
+              {post.data.description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {remainingPosts.length === 0 && !featuredPost && (
+        <div class="py-20 text-center border border-dashed border-editorial-border">
+            <p class="text-editorial-muted font-serif italic text-xl">Coming soon...</p>
+        </div>
+    )}
+
+  </section>
+</BaseLayout>

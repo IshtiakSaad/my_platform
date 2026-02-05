@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  /* Matches your React code's expectations */
+  --color-editorial-bg: #ffffff;       
+  --color-editorial-text: #1C1917;     
+  --color-editorial-muted: #57534E;    
+  --color-editorial-accent: #FAC638;   
+  --color-editorial-border: #E7E5E4;   
+}
+
+/* Base setup */
+body {
+  background-color: var(--color-editorial-bg);
+  color: var(--color-editorial-text);
+}
+
+/* The Link Underline from your React code */
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.3s ease;
+}
+
+.group:hover .link-underline {
+  text-decoration-color: var(--color-editorial-accent);
+}
