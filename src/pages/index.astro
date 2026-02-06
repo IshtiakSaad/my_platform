@@ -1,194 +1,270 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layout/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-// 1. Fetch Data (Replacing INITIAL_ARTICLES)
+// 1. Fetch and Sort Data
 const allPosts = await getCollection('blog', ({ data }) => {
   return data.draft !== true;
 });
+// Sort by newest first
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Helper to sort by date
-const sortPosts = (posts) => posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// 2. Buckets for the Layout
+// "Latest Notes" = The absolute newest 4 posts regardless of category
+const latestNotes = sortedPosts.slice(0, 4);
 
-// 2. Filter Categories (Matching your React Logic)
-const techArticles = sortPosts(allPosts.filter(p => p.data.category === 'Tech'));
-const philosophyArticles = sortPosts(allPosts.filter(p => p.data.category === 'Philosophy'));
-const psychArticles = sortPosts(allPosts.filter(p => p.data.category === 'Psychology'));
-const econArticles = sortPosts(allPosts.filter(p => p.data.category === 'Economics'));
+// Category Buckets (Filtering logic)
+const techPosts = sortedPosts.filter(p => p.data.category.toLowerCase().includes('tech'));
+const philPosts = sortedPosts.filter(p => p.data.category.toLowerCase().includes('philosophy'));
+const psychPosts = sortedPosts.filter(p => p.data.category.toLowerCase().includes('psychology'));
+const econPosts = sortedPosts.filter(p => p.data.category.toLowerCase().includes('economics'));
 
-// 3. Fallbacks (To prevent crash if a category is empty)
-const techFeatured = techArticles[0];
-const techStandard = techArticles.slice(1, 3); // Get next 2
+// 3. Featured Slot Logic
+// We need 1 main + 3 side for Tech/Phil, and lists for others.
+// Safely handle empty arrays to prevent crashes if you don't have enough posts yet.
+
+// Tech Section
+const techFeatured = techPosts[0]; 
+const techSidebar = techPosts.slice(1, 4); 
+
+// Philosophy Section
+const philFeatured = philPosts[0];
+const philSidebar = philPosts.slice(1, 3);
+
+// Psych & Econ Columns
+const psychList = psychPosts.slice(0, 3);
+const econList = econPosts.slice(0, 3);
+
+const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 ---
 
 <BaseLayout title="Home - Ishtiak Saad">
-  
-  <section class="py-20 md:py-32 grid grid-cols-12 gap-8 items-end border-b border-editorial-border">
-    <div class="col-span-12 lg:col-span-8">
-      <h1 class="text-5xl md:text-8xl font-bold leading-[0.95] mb-6 text-editorial-text tracking-tight font-serif">
-        Decoding the human condition in the digital age.
-      </h1>
-    </div>
-    <div class="col-span-12 lg:col-span-4 lg:pb-4 border-l border-editorial-border/0 lg:border-editorial-border pl-0 lg:pl-8">
-      <p class="text-xl md:text-2xl text-editorial-muted font-light italic leading-relaxed font-serif">
-        Independent perspectives on Technology, Psychology, and Economics.
-      </p>
-      <div class="mt-8 w-12 h-[1px] bg-editorial-accent"></div>
-    </div>
-  </section>
-
-  <div class="grid grid-cols-1 md:grid-cols-12 border-b border-editorial-border">
     
-    <section class="md:col-span-8 py-12 md:pr-12 border-r-0 md:border-r border-editorial-border">
-      <div class="flex items-center justify-between mb-10 pb-4 border-b border-editorial-border">
-        <h2 class="text-3xl font-serif italic text-editorial-text">Technology</h2>
-        <a href="/tech" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-editorial-accent flex items-center gap-2 group transition-colors font-sans">
-          View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
-      </div>
-
-      <div class="grid grid-cols-1 gap-16">
-        {techFeatured && (
-          <a href={`/posts/${techFeatured.slug}`} class="group block">
-            <div class="flex flex-col gap-4">
-              <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-                <span>{techFeatured.data.pubDate.toLocaleDateString()}</span>
-                <span class="w-1 h-[1px] bg-editorial-border"></span>
-                <span>Essay</span>
-              </div>
-              <h3 class="text-4xl md:text-5xl font-serif font-bold text-editorial-text leading-tight max-w-2xl link-underline">
-                {techFeatured.data.title} <span class="hidden group-hover:inline-block text-editorial-accent ml-2 transition-opacity">→</span>
-              </h3>
-              <p class="text-editorial-muted leading-relaxed max-w-xl text-lg font-serif">
-                {techFeatured.data.description}
-              </p>
+    <section class="py-12 md:py-16 grid grid-cols-12 gap-8 items-end border-b border-editorial-border">
+        <div class="col-span-12 lg:col-span-8">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-4 text-editorial-text tracking-tight font-serif">
+                Decoding the human condition in the digital age.
+            </h1>
+            <div class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">Trending:</span>
+                <a href="/posts/psychology/past-vs-future-self/" class="px-3 py-1 bg-white border border-editorial-border rounded-full text-[10px] font-bold uppercase tracking-wide text-editorial-muted hover:border-primary hover:text-primary transition-all">Steve Rogers</a>
+                <a href="/posts/economics/freedman/" class="px-3 py-1 bg-white border border-editorial-border rounded-full text-[10px] font-bold uppercase tracking-wide text-editorial-muted hover:border-primary hover:text-primary transition-all">Milton Freedman's White Paper</a>
+                <a href="/posts/tech/exponential-tech-ai/" class="px-3 py-1 bg-white border border-editorial-border rounded-full text-[10px] font-bold uppercase tracking-wide text-editorial-muted hover:border-primary hover:text-primary transition-all">Exponential Technology & AI</a>
             </div>
-          </a>
-        )}
+        </div>
+        <div class="col-span-12 lg:col-span-4 lg:pb-2 border-l border-editorial-border/0 lg:border-editorial-border pl-0 lg:pl-8 flex flex-col justify-end h-full">
+            <p class="text-lg md:text-xl text-editorial-muted font-light italic leading-relaxed font-serif">
+                Independent perspectives on Technology, Psychology, and Economics.
+            </p>
+            <div class="mt-6 flex items-center gap-2">
+                <span class="w-8 h-[1px] bg-primary"></span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">Updated Weekly</span>
+            </div>
+        </div>
+    </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-editorial-border/30">
-          {techStandard.map(post => (
-            <a href={`/posts/${post.slug}`} class="group flex flex-col gap-3">
-              <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-                <span>{post.data.pubDate.toLocaleDateString()}</span>
-              </div>
-              <h3 class="text-xl font-serif font-bold text-editorial-text link-underline">{post.data.title}</h3>
+    <section class="py-10 border-b border-editorial-border">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <h2 class="text-lg font-bold uppercase tracking-widest text-editorial-text">Latest Notes</h2>
+            </div>
+            <a href="/archive" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">View Archive →</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
+            {latestNotes.map(post => (
+                <a href={`/posts/${post.slug}`} class="group block">
+                    <div class="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-editorial-muted mb-2">
+                        <span class="text-primary">{post.data.category.slice(0,4)}</span>
+                        <span>•</span>
+                        <span>{formatDate(post.data.pubDate)}</span>
+                    </div>
+                    <h3 class="text-lg font-serif font-bold text-editorial-text leading-snug group-hover:underline decoration-primary decoration-1 underline-offset-4 transition-all">
+                        {post.data.title}
+                    </h3>
+                    <span class="text-[10px] text-editorial-muted mt-2 block">Read Article</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <section class="py-12 border-b border-editorial-border">
+        <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border/40">
+            <h2 class="text-4xl md:text-5xl font-serif text-editorial-text">Technology</h2>
+            <a href="/tech" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
+                View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
-          ))}
         </div>
-      </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <div class="lg:col-span-8">
+                {techFeatured ? (
+                <a href={`/posts/${techFeatured.slug}`} class="group block">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
+                            <span class="bg-amber-100 text-amber-500 px-2 py-0.5 rounded-sm">Featured</span>
+                            <span>{formatDate(techFeatured.data.pubDate)}</span>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-editorial-text leading-tight link-underline">
+                            {techFeatured.data.title}
+                        </h3>
+                        <p class="text-editorial-muted leading-relaxed max-w-2xl text-lg mt-1 line-clamp-3">
+                            {techFeatured.data.description}
+                        </p>
+                        <span class="text-xs font-bold uppercase tracking-widest text-editorial-text mt-2 group-hover:text-primary transition-colors flex items-center gap-1">Read Article <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
+                    </div>
+                </a>
+                ) : <p>No technology posts yet.</p>}
+            </div>
+
+            <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-editorial-border lg:pl-10">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted opacity-50 mb-2">More in Tech</span>
+                {techSidebar.map(post => (
+                    <div>
+                        <a href={`/posts/${post.slug}`} class="group flex flex-col gap-1">
+                            <h4 class="text-lg font-serif font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
+                                {post.data.title}
+                            </h4>
+                            <div class="flex items-center gap-2 text-[10px] text-editorial-muted mt-1">
+                                <span>{formatDate(post.data.pubDate)}</span>
+                            </div>
+                        </a>
+                        <div class="w-full h-[1px] bg-editorial-border/40 mt-4"></div>
+                    </div>
+                ))}
+            </div>
+        </div>
     </section>
 
-    <section class="md:col-span-4 py-12 md:pl-12 flex flex-col h-full">
-      <div class="flex items-center justify-between mb-10 pb-4 border-b border-editorial-border">
-        <h2 class="text-3xl font-serif italic text-editorial-text">Philosophy</h2>
-        <a href="/philosophy" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-editorial-accent flex items-center gap-2 group transition-colors font-sans">
-          View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
-      </div>
-      
-      <div class="flex flex-col gap-12 h-full">
-        {philosophyArticles.slice(0, 2).map(post => (
-          <a href={`/posts/${post.slug}`} class="group block">
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-                <span>{post.data.pubDate.toLocaleDateString()}</span>
-              </div>
-              <h3 class="text-2xl font-serif font-bold text-editorial-text link-underline leading-snug">{post.data.title}</h3>
-              <p class="text-sm text-editorial-muted leading-relaxed mt-1 font-serif">{post.data.description}</p>
-            </div>
-          </a>
-        ))}
-        <div class="flex-grow hidden md:block border-l border-editorial-border/30 ml-2 pl-6 pt-6">
-          <p class="text-xs text-editorial-muted italic font-serif">"Philosophy is the microscope of thought."</p>
+    <section class="py-12 border-b border-editorial-border">
+        <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border/40">
+            <h2 class="text-4xl md:text-5xl font-serif text-editorial-text">Philosophy</h2>
+            <a href="/philosophy" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
+                View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-12">
-    
-    <section class="md:col-span-5 py-12 md:pr-12 border-r-0 md:border-r border-editorial-border">
-      <div class="flex items-center justify-between mb-10 pb-4 border-b border-editorial-border">
-        <h2 class="text-3xl font-serif italic text-editorial-text">Psychology</h2>
-        <a href="/psychology" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-editorial-accent flex items-center gap-2 group transition-colors font-sans">
-          View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
-      </div>
-      <div class="flex flex-col gap-10">
-        {psychArticles[0] && (
-          <a href={`/posts/${psychArticles[0].slug}`} class="group block">
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-                <span>{psychArticles[0].data.pubDate.toLocaleDateString()}</span>
-              </div>
-              <h3 class="text-3xl font-serif font-bold text-editorial-text link-underline leading-tight">{psychArticles[0].data.title}</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+             <div class="lg:col-span-8">
+                {philFeatured ? (
+                <a href={`/posts/${philFeatured.slug}`} class="group block">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
+                            <span class="bg-amber-100 text-amber-500 px-2 py-0.5 rounded-sm">Featured</span>
+                            <span>{formatDate(philFeatured.data.pubDate)}</span>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-serif font-bold text-editorial-text link-underline leading-snug">
+                            {philFeatured.data.title}
+                        </h3>
+                        <p class="text-editorial-muted leading-relaxed max-w-xl text-lg mt-1 line-clamp-3">
+                            {philFeatured.data.description}
+                        </p>
+                    </div>
+                </a>
+                ) : <p>No philosophy posts yet.</p>}
             </div>
-          </a>
-        )}
+             <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-editorial-border lg:pl-10">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted opacity-50 mb-2">More in Philosophy</span>
+                {philSidebar.map(post => (
+                    <div>
+                        <a href={`/posts/${post.slug}`} class="group flex flex-col gap-1">
+                            <h4 class="text-lg font-serif font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
+                                {post.data.title}
+                            </h4>
+                            <div class="flex items-center gap-2 text-[10px] text-editorial-muted mt-1">
+                                <span>{formatDate(post.data.pubDate)}</span>
+                            </div>
+                        </a>
+                        <div class="w-full h-[1px] bg-editorial-border/40 mt-4"></div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 py-12">
         
-        {psychArticles[1] && (
-          <div class="pt-8 border-t border-editorial-border/30">
-             <a href={`/posts/${psychArticles[1].slug}`} class="group block">
-                <div class="flex flex-col gap-3">
-                  <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-                    <span>{psychArticles[1].data.pubDate.toLocaleDateString()}</span>
-                  </div>
-                  <h3 class="text-xl font-serif font-bold text-editorial-text link-underline leading-snug">{psychArticles[1].data.title}</h3>
-                </div>
-            </a>
-          </div>
-        )}
-      </div>
-    </section>
-
-    <section class="md:col-span-7 py-12 md:pl-12">
-      <div class="flex items-center justify-between mb-10 pb-4 border-b border-editorial-border">
-        <h2 class="text-3xl font-serif italic text-editorial-text">Economics</h2>
-        <a href="/economics" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-editorial-accent flex items-center gap-2 group transition-colors font-sans">
-          View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {econArticles.slice(0, 2).map(post => (
-          <a href={`/posts/${post.slug}`} class="group flex flex-col gap-4">
-            <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted font-sans">
-               <span>{post.data.pubDate.toLocaleDateString()}</span>
+        <section class="flex flex-col h-full">
+            <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border">
+                <h2 class="text-3xl md:text-4xl font-serif text-editorial-text">Psychology</h2>
+                <a href="/psychology" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
+                    All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
             </div>
-            <h3 class="text-2xl font-serif font-bold text-editorial-text link-underline">{post.data.title}</h3>
-            <p class="text-sm text-editorial-muted leading-relaxed font-serif">{post.data.description}</p>
-          </a>
-        ))}
-      </div>
-    </section>
-  </div>
+            <div class="flex flex-col gap-8">
+                {psychList.map((post, index) => (
+                    <div class="group">
+                        <a href={`/posts/${post.slug}`} class="block">
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
+                                    <span>{formatDate(post.data.pubDate)}</span>
+                                </div>
+                                <h3 class={`font-serif font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
+                                    {post.data.title}
+                                </h3>
+                                {index === 0 && <p class="text-sm text-editorial-muted leading-relaxed mt-1 line-clamp-2">{post.data.description}</p>}
+                            </div>
+                        </a>
+                        <div class="w-full h-[1px] bg-editorial-border/40 mt-6"></div>
+                    </div>
+                ))}
+            </div>
+        </section>
 
-  <section class="mt-20 relative overflow-hidden bg-white border border-editorial-border px-8 py-16 md:px-20 md:py-24 max-w-5xl mx-auto rounded-sm">
-    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-editorial-accent/10 to-transparent pointer-events-none"></div>
-    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div>
-        <div class="flex items-center gap-4 mb-8 text-editorial-accent">
-          <span class="w-8 h-[1px] bg-editorial-accent"></span>
-          <span class="text-[10px] font-bold uppercase tracking-[0.3em] font-sans">The Sunday Digest</span>
-        </div>
-        <h2 class="text-4xl md:text-5xl font-serif font-bold text-editorial-text mb-6 leading-tight">Join 15,000+ curious minds.</h2>
-        <p class="text-editorial-muted text-lg font-light leading-relaxed font-serif">
-           Get my latest essays on the intersection of humanity and technology delivered straight to your inbox every Sunday.
-        </p>
-      </div>
-      <div class="w-full">
-        <form class="flex flex-col gap-4">
-          <input class="w-full px-0 py-4 bg-transparent border-b border-editorial-border text-editorial-text placeholder-editorial-muted/50 focus:outline-none focus:border-editorial-accent transition-all text-lg font-serif" placeholder="Email Address" type="email"/>
-          <button class="mt-4 self-start group flex items-center gap-4 text-editorial-text font-bold uppercase tracking-widest text-xs py-2 font-sans" type="button">
-            <span>Subscribe for free</span>
-            <span class="material-symbols-outlined text-editorial-accent group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
-          </button>
-        </form>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted mt-12 opacity-60 font-sans">
-           Read by leaders at Google, Stripe, and The Atlantic.
-        </p>
-      </div>
+        <section class="flex flex-col h-full lg:border-l lg:border-editorial-border lg:pl-12">
+            <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border">
+                <h2 class="text-3xl md:text-4xl font-serif text-editorial-text">Economics</h2>
+                <a href="/economics" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
+                    All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+            </div>
+             <div class="flex flex-col gap-8">
+                {econList.map((post, index) => (
+                    <div class="group">
+                        <a href={`/posts/${post.slug}`} class="block">
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
+                                    <span>{formatDate(post.data.pubDate)}</span>
+                                </div>
+                                <h3 class={`font-serif font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
+                                    {post.data.title}
+                                </h3>
+                                {index === 0 && <p class="text-sm text-editorial-muted leading-relaxed mt-1 line-clamp-2">{post.data.description}</p>}
+                            </div>
+                        </a>
+                        <div class="w-full h-[1px] bg-editorial-border/40 mt-6"></div>
+                    </div>
+                ))}
+            </div>
+        </section>
     </div>
-  </section>
+
+    <section class="mt-20 relative overflow-hidden bg-white border border-editorial-border/50 px-8 py-16 md:px-20 md:py-20 max-w-5xl mx-auto rounded-sm shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <div class="flex items-center gap-4 mb-8 text-primary">
+                    <span class="w-8 h-[1px] bg-primary"></span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em]">The Sunday Digest</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-editorial-text mb-6 leading-tight">Join 200+ curious minds.</h2>
+                <p class="text-editorial-muted text-lg font-light leading-relaxed">
+                    Get my latest essays on the intersection of humanity and technology delivered straight to your inbox every Sunday.
+                </p>
+            </div>
+            <div class="w-full">
+                <form class="flex flex-col gap-4">
+                    <label class="sr-only" for="email">Email address</label>
+                    <input class="w-full px-0 py-4 bg-transparent border-b border-editorial-border text-editorial-text placeholder-editorial-muted/50 focus:outline-none focus:border-primary transition-all text-lg" id="email" placeholder="Email Address" type="email"/>
+                    <button class="mt-4 self-start group flex items-center gap-4 text-editorial-text font-bold uppercase tracking-widest text-xs py-2" type="button">
+                        <span>Subscribe for free</span>
+                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+                    </button>
+                </form>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted mt-12 opacity-60">
+                    Read by individuals at MIT, Meta, and many more.
+                </p>
+            </div>
+        </div>
+    </section>
 
 </BaseLayout>

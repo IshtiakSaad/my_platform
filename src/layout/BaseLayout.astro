@@ -1,54 +1,151 @@
 ---
-import '../styles/global.css';
-import '@fontsource/inter';
-import '@fontsource/playfair-display';
-
-// We use a Google Font for the icons to match your design exactly
+// src/layouts/BaseLayout.astro
+import "../styles/global.css";
 const { title } = Astro.props;
 ---
 
-<html lang="en">
+<!doctype html>
+<html class="light" lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-  </head>
-  <body class="flex flex-col min-h-screen">
-    
-    <header class="w-full px-6 py-6 md:px-12 flex items-center justify-between border-b border-editorial-border sticky top-0 bg-[#f8f8f5]/95 backdrop-blur-md z-50">
-        <a href="/" class="text-2xl font-serif font-bold tracking-tight hover:text-editorial-accent transition-colors">
-            Ishtiak Saad
-        </a>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title || "Ishtiak Saad"}</title>
 
-        <nav class="hidden md:flex items-center gap-8">
-            <a href="/tech" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-editorial-accent transition-colors">Technology</a>
-            <a href="/psychology" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-editorial-accent transition-colors">Psychology</a>
-            <a href="/economics" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-editorial-accent transition-colors">Economics</a>
-            <a href="/philosophy" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-editorial-accent transition-colors">Philosophy</a>
-        </nav>
-        
-        <button class="md:hidden text-editorial-text">
-            <span class="material-symbols-outlined">menu</span>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      /* Smooth underline animation */
+      .link-underline {
+        text-decoration-line: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+        transition: text-decoration-color 0.3s ease;
+      }
+      .group:hover .link-underline {
+        text-decoration-color: #fac638;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light text-editorial-text antialiased min-h-screen flex flex-col selection:bg-primary/30"
+  >
+    <header
+      class="w-full px-6 py-6 md:px-12 lg:px-20 flex items-center justify-between border-b border-editorial-border sticky top-0 bg-background-light/95 backdrop-blur-md z-50"
+    >
+      <div class="flex items-center gap-8">
+        <a
+          href="/"
+          class="text-2xl font-serif font-bold tracking-tight text-editorial-text hover:text-primary transition-colors"
+        >
+          Ishtiak Saad
+        </a>
+        <div
+          class="hidden lg:flex items-center gap-6 pl-8 border-l border-editorial-border"
+        >
+          <a
+            href="/archive"
+            class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors"
+            >Archive</a
+          >
+          <a
+            href="/tech"
+            class="text-[10px] font uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors"
+            >Technology</a
+          >
+          <a
+            href="/philosophy"
+            class="text-[10px] font uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors"
+            >Philosophy</a
+          >
+          <a
+            href="/economics"
+            class="text-[10px] font uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors"
+            >Economics</a
+          >
+          <a
+            href="/psychology"
+            class="text-[10px] font uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors"
+            >Psychology</a
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <button
+          class="hidden md:flex items-center gap-2 group text-editorial-muted hover:text-editorial-text transition-colors"
+        >
+          <span
+            class="text-[10px] font-bold uppercase tracking-widest hidden lg:block"
+            >Search</span
+          >
+          <span
+            class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors"
+            >search</span
+          >
         </button>
+        <button class="md:hidden text-editorial-text">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
     </header>
 
-    <main class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-32">
+    <div class="bg-gray-50">
+      <main
+        class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pb-32"
+      >
         <slot />
-    </main>
+      </main>
+    </div>
 
-    <footer class="w-full border-t border-editorial-border py-12 bg-white mt-auto">
-        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex flex-col gap-2">
-                <span class="text-xl font-serif font-bold">Ishtiak Saad</span>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">© {new Date().getFullYear()} All rights reserved.</p>
-            </div>
-            <div class="flex gap-10">
-                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-editorial-accent transition-colors">Twitter</a>
-                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-editorial-accent transition-colors">LinkedIn</a>
-            </div>
+    <footer class="w-full border-t border-editorial-border py-16 bg-white">
+      <div
+        class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div class="flex flex-col gap-2 text-center md:text-left">
+          <span class="text-xl font-serif font-bold text-editorial-text"
+            >Ishtiak Saad</span
+          >
+          <p
+            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted"
+          >
+            © 2026. All rights reserved.
+          </p>
         </div>
+        <div class="flex gap-10">
+          <a
+            href="#"
+            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
+            >Twitter</a
+          >
+          <a
+            href="#"
+            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
+            >LinkedIn</a
+          >
+          <a
+            href="#"
+            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
+            >RSS</a
+          >
+        </div>
+      </div>
     </footer>
-
   </body>
 </html>

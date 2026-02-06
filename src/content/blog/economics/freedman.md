@@ -2,7 +2,7 @@
 title: "How one man’s naïveté put the entire world in mayhem."
 description: "Why silence is the most powerful answer to noise."
 category: "Economics"
-pubDate: 2024-05-21
+pubDate: 2022-05-21
 draft: false
 ---
 
