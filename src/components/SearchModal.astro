@@ -1,0 +1,126 @@
+<div id="search-modal" class="hidden fixed inset-0 z-[100] bg-background-light/95 backdrop-blur-xl p-8 md:p-20 overflow-y-auto">
+    
+    <div class="absolute top-8 right-8 flex items-center gap-4">
+        <span class="hidden md:block text-[10px] font-bold uppercase tracking-widest text-editorial-muted opacity-60">Esc to close</span>
+        <button id="close-search" class="text-editorial-muted hover:text-editorial-text transition-colors">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-24">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-editorial-text mb-12 text-center">Search the archives</h2>
+        <div id="pagefind-search" class="font-sans"></div>
+    </div>
+</div>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+
+<script>
+    // Initialize Pagefind
+    window.addEventListener('DOMContentLoaded', () => {
+        if (typeof PagefindUI !== 'undefined') {
+            new PagefindUI({ 
+                element: "#pagefind-search", 
+                showSubResults: true,
+                excerptLength: 30,
+                autofocus: true
+            });
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('search-modal');
+        const openBtn = document.getElementById('open-search'); 
+        const closeBtn = document.getElementById('close-search');
+
+        const closeModal = () => {
+            if (modal) modal.classList.add('hidden');
+        };
+
+        const openModal = () => {
+            if (modal) {
+                modal.classList.remove('hidden');
+                // Focus the input after a tiny delay so the modal is rendered
+                setTimeout(() => {
+                   const input = modal.querySelector('input');
+                   if(input) input.focus();
+                }, 100);
+            }
+        };
+
+        if (openBtn && modal && closeBtn) {
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // Close if clicking outside the content (optional nice-to-have)
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+    });
+</script>
+
+<style is:global>
+    /* THE FIX: 
+       We increase padding-left to 3rem (roughly 48px) to push text 
+       past the magnifying glass icon. 
+    */
+    .pagefind-ui__search-input {
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid #E7E5E4 !important;
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2rem !important; /* Large text */
+        padding: 1rem 0 1rem 3.5rem !important; /* Top, Right, Bottom, LEFT padding fix */
+        color: #1C1917 !important;
+        box-shadow: none !important; /* Removes default glow */
+    }
+
+    .pagefind-ui__search-input::placeholder {
+        opacity: 0.3;
+        color: #57534E !important;
+    }
+
+    .pagefind-ui__search-input:focus {
+        border-bottom: 2px solid #FAC638 !important;
+        outline: none !important;
+    }
+    
+    /* Style the Clear 'X' Button inside the input */
+    .pagefind-ui__search-clear {
+        background-color: transparent !important;
+        color: #57534E !important;
+    }
+
+    /* Style the Results */
+    .pagefind-ui__result-title {
+        font-family: 'Playfair Display', serif !important;
+        font-weight: 700 !important;
+        font-size: 1.25rem !important;
+        color: #1C1917 !important;
+    }
+    
+    .pagefind-ui__result-excerpt {
+        font-family: 'Inter', sans-serif !important;
+        color: #57534E !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-top: 0.5rem !important;
+    }
+
+    /* Hide the default "Searching..." text if you want a cleaner look */
+    .pagefind-ui__message {
+        font-family: 'Inter', sans-serif !important;
+        color: #57534E !important;
+        margin-top: 1rem !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+    }
+</style>
