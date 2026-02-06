@@ -42,7 +42,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
     
     <section class="py-12 md:py-16 grid grid-cols-12 gap-8 items-end border-b border-editorial-border">
         <div class="col-span-12 lg:col-span-8">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-4 text-editorial-text tracking-tight font-serif">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-4 text-editorial-text tracking-tighter font-sans uppercase">
                 Decoding the human condition in the digital age.
             </h1>
             <div class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -57,7 +57,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                 Independent perspectives on Technology, Psychology, and Economics.
             </p>
             <div class="mt-6 flex items-center gap-2">
-                <span class="w-8 h-[1px] bg-primary"></span>
+                <span class="w-8 h-[2px] bg-amber-400"></span>
                 <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">Updated Weekly</span>
             </div>
         </div>
@@ -66,8 +66,8 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
     <section class="py-10 border-b border-editorial-border">
         <div class="flex items-center justify-between mb-8">
             <div class="flex items-center gap-3">
-                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                <h2 class="text-lg font-bold uppercase tracking-widest text-editorial-text">Latest Notes</h2>
+                <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                <h2 class="text-2xl font-bold font-serif uppercase tracking-widest text-editorial-text">Latest Notes</h2>
             </div>
             <a href="/archive" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">View Archive →</a>
         </div>
@@ -75,11 +75,11 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
             {latestNotes.map(post => (
                 <a href={`/posts/${post.slug}`} class="group block">
                     <div class="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-editorial-muted mb-2">
-                        <span class="text-amber-500 font-bold">{post.data.category.slice(0,4)}</span>
+                        <span class="text-amber-500 font-bold">{post.data.category}</span>
                         <span>•</span>
                         <span>{formatDate(post.data.pubDate)}</span>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-editorial-text leading-snug group-hover:underline decoration-primary decoration-1 underline-offset-4 transition-all">
+                    <h3 class="text-lg font-sans uppercase font-bold text-editorial-text leading-snug group-hover:underline decoration-primary decoration-1 underline-offset-4 transition-all">
                         {post.data.title}
                     </h3>
                     <span class="text-[10px] text-editorial-muted mt-2 block">Read Article</span>
@@ -90,7 +90,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
 
     <section class="py-12 border-b border-editorial-border">
         <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border/40">
-            <h2 class="text-4xl md:text-5xl font-serif text-editorial-text">Technology</h2>
+            <h2 class="text-4xl md:text-5xl font-serif text-editorial-text ">Technology</h2>
             <a href="/tech" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
                 View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
@@ -105,7 +105,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                             <span class="bg-amber-100 text-amber-500 px-2 py-0.5 rounded-sm">Featured</span>
                             <span>{formatDate(techFeatured.data.pubDate)}</span>
                         </div>
-                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-editorial-text leading-tight link-underline">
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl uppercase font-sans font-bold text-editorial-text leading-tight link-underline">
                             {techFeatured.data.title}
                         </h3>
                         <p class="text-editorial-muted leading-relaxed max-w-2xl text-lg mt-1 line-clamp-3">
@@ -122,7 +122,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                 {techSidebar.map(post => (
                     <div>
                         <a href={`/posts/${post.slug}`} class="group flex flex-col gap-1">
-                            <h4 class="text-lg font-serif font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
+                            <h4 class="text-lg uppercase font-sans font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
                                 {post.data.title}
                             </h4>
                             <div class="flex items-center gap-2 text-[10px] text-editorial-muted mt-1">
@@ -152,12 +152,13 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                             <span class="bg-amber-100 text-amber-500 px-2 py-0.5 rounded-sm">Featured</span>
                             <span>{formatDate(philFeatured.data.pubDate)}</span>
                         </div>
-                        <h3 class="text-3xl md:text-4xl font-serif font-bold text-editorial-text link-underline leading-snug">
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl uppercase font-sans font-bold text-editorial-text link-underline leading-snug">
                             {philFeatured.data.title}
                         </h3>
                         <p class="text-editorial-muted leading-relaxed max-w-xl text-lg mt-1 line-clamp-3">
                             {philFeatured.data.description}
                         </p>
+                        <span class="text-xs font-bold uppercase tracking-widest text-editorial-text mt-2 group-hover:text-primary transition-colors flex items-center gap-1">Read Article <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
                     </div>
                 </a>
                 ) : <p>No philosophy posts yet.</p>}
@@ -167,7 +168,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                 {philSidebar.map(post => (
                     <div>
                         <a href={`/posts/${post.slug}`} class="group flex flex-col gap-1">
-                            <h4 class="text-lg font-serif font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
+                            <h4 class="text-lg uppercase font-sans font-bold text-editorial-text group-hover:text-primary transition-colors leading-tight">
                                 {post.data.title}
                             </h4>
                             <div class="flex items-center gap-2 text-[10px] text-editorial-muted mt-1">
@@ -187,7 +188,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
             <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border">
                 <h2 class="text-3xl md:text-4xl font-serif text-editorial-text">Psychology</h2>
                 <a href="/psychology" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
-                    All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
             <div class="flex flex-col gap-8">
@@ -198,7 +199,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                                 <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
                                     <span>{formatDate(post.data.pubDate)}</span>
                                 </div>
-                                <h3 class={`font-serif font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
+                                <h3 class={`font-sans uppercase font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
                                     {post.data.title}
                                 </h3>
                                 {index === 0 && <p class="text-sm text-editorial-muted leading-relaxed mt-1 line-clamp-2">{post.data.description}</p>}
@@ -214,7 +215,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
             <div class="flex items-end justify-between mb-8 pb-4 border-b border-editorial-border">
                 <h2 class="text-3xl md:text-4xl font-serif text-editorial-text">Economics</h2>
                 <a href="/economics" class="text-[10px] font-bold uppercase tracking-widest text-editorial-text hover:text-primary flex items-center gap-2 group transition-colors mb-2">
-                    All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
              <div class="flex flex-col gap-8">
@@ -225,7 +226,7 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
                                 <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-editorial-muted">
                                     <span>{formatDate(post.data.pubDate)}</span>
                                 </div>
-                                <h3 class={`font-serif font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
+                                <h3 class={`font-sans uppercase font-bold text-editorial-text link-underline leading-tight ${index === 0 ? 'text-2xl' : 'text-lg'}`}>
                                     {post.data.title}
                                 </h3>
                                 {index === 0 && <p class="text-sm text-editorial-muted leading-relaxed mt-1 line-clamp-2">{post.data.description}</p>}
@@ -239,16 +240,16 @@ const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', 
     </div>
 
     <section class="mt-20 relative overflow-hidden bg-white border border-editorial-border/50 px-8 py-16 md:px-20 md:py-20 max-w-5xl mx-auto rounded-sm shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] mb-32">
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-r-to-l from-primary/5 to-transparent pointer-events-none"></div>
         <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
                 <div class="flex items-center gap-4 mb-8 text-primary">
-                    <span class="w-8 h-[1px] bg-primary"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em]">The Sunday Digest</span>
+                    <span class="w-8 h-[1px] bg-amber-300"></span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em]">The Friday Digest</span>
                 </div>
                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-editorial-text mb-6 leading-tight">Join 200+ curious minds.</h2>
                 <p class="text-editorial-muted text-lg font-light leading-relaxed">
-                    Get my latest essays on the intersection of humanity and technology delivered straight to your inbox every Sunday.
+                    Get my latest articles on the intersection of humanity and technology delivered straight to your inbox every Friday.
                 </p>
             </div>
             <div class="w-full">

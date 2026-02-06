@@ -1,6 +1,6 @@
 ---
-title: "Warrior Ethos with our Parents"
-description: "Why silence is the most powerful answer to noise."
+title: "Warrior Ethos: Honor, Sacrifice, and the Debt We Don’t Admit"
+description: "A reflection on honor, sacrifice, and why our parents are the only people we truly owe an explanation."
 category: "Philosophy"
 pubDate: 2023-07-09
 draft: false

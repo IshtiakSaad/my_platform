@@ -1,6 +1,6 @@
 ---
 title: "The best way to learn something."
-description: "Why silence is the most powerful answer to noise."
+description: "Why adults stop learning like children—and how to remove the internal barrier."
 category: "Psychology"
 pubDate: 2022-10-20
 draft: false

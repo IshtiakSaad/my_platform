@@ -1,6 +1,6 @@
 ---
 title: "It’s a suck-fest! Engineering schools? Yes! "
-description: "Why silence is the most powerful answer to noise."
+description: "How the brutal engineering admission gauntlet builds identity, resilience, and perspective."
 category: "Philosophy"
 pubDate: 2022-06-23
 draft: false
@@ -20,6 +20,8 @@ I call mom everyday and it’s the same story, different context. She knows it�
 Nobody, and I mean, nobody can withstand a challenge of this caliber if he/she doesn’t have that level of endurance built into the identity in the admission war. The whole war season feels like a walk in the park now, but it’s what prepares us for the life that’s ahead. It’s the nature’s way of saying, “If you can prepare yourself, we have a pass for you. If you can’t, well, then there’s no point wasting resources on you.” 
 
 Admission war is horrendous to go through. You go through 12-16 hour workdays and countless sleepless nights. You forget who you are, where you’ve been for the past three days, don’t remember if you had your dinner last night or not, you’re fatigued, completely exhausted and there’s a reason you have to go through it. I didn’t realize it back then but now I do. 
+
+![](https://www.specialforces78.com/wp-content/uploads/2025/08/James_Stockdale_Oold_Young-1200px.jpg)
 
 James Stockdale one of the most highly decorated officers in the history of the U.S. Navy. His plane was shot down over Vietnam in 1965, and he was held as a prisoner of war for seven and a half years. Seven and a half years! During his captivity he spent more than four years in solitary confinement and was repeatedly tortured—his shoulders torn from their sockets, his back broken, his legs crushed. He walked with a limp and endured much pain for the rest of his life.
 

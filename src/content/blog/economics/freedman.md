@@ -1,12 +1,11 @@
 ---
 title: "How one man’s naïveté put the entire world in mayhem."
-description: "Why silence is the most powerful answer to noise."
+description: "Profit-maximization doctrine and how shareholder-primacy distorted capitalism, erodes ethics, responsibility."
 category: "Economics"
 pubDate: 2022-05-21
 draft: false
 ---
 
-## The Silence
 Let’s assume that you and I live in a small suburban town. It’s a small community of people. And I - a single human being - happen to be a seller. A lot of people in my community are in small businesses. A few of my friends are in the clothes business. And some others sell shoes and laces. I sell rice. What we sell isn’t important here. What really matters is that we’re the ones that keep the community together and the cycle moving. Why are we doing this? It’s an act of service to the community I belong to and to make a living out of it. So here I have two motivating factors a) Service to the community and b) we make some profit out of it and that profit inspires us to serve even more. What motivates us is vital. If I choose to raise the prices to make more profit then I’m checking just one box and it isn’t “Service to the community”. I can’t just raise the prices even if I’m the only one selling the stuff. It’s not ethical. It’s greedy and promotes self-interest.
 
 In six months I hire a bunch of guys to help me with the business and I pay them weekly. OK, so, now I don’t have to raise the prices to make more profit. I can just cut their salaries. The community won’t have to pay high bucks for it. But my guys have families too. They’re part of the community. They too have life. I can’t just, in a sane mind, put them in that position just to make more money which doesn’t have any meaning attached to it. One might say, well if you need to grow your business you’re gonna need a lot of money. Yeah. And that’s why making a profit is important, we want to grow to serve the community. Still, the question is there, do you get to lower their salaries even a little bit? in the only case to just grow your business?

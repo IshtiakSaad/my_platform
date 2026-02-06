@@ -40,7 +40,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
       </div>
 
       <h1
-        class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-editorial-text leading-[1.1] mb-8"
+        class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-editorial-text leading-[1.1] mb-8"
       >
         {post.data.title}
       </h1>
@@ -71,12 +71,12 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
       <div
         class="prose prose-lg prose-stone max-w-none
             prose-headings:font-serif prose-headings:font-bold prose-headings:text-editorial-text
-            prose-p:font-serif prose-p:text-editorial-text/90 prose-p:leading-8 prose-p:mb-6
+            prose-p:font-sans-serif prose-p:text-editorial-text/90 prose-p:leading-8 prose-p:mb-6
             prose-p:text-justify prose-p:hyphens-auto
             prose-a:text-editorial-accent prose-a:no-underline hover:prose-a:underline
             prose-blockquote:border-l-editorial-accent prose-blockquote:bg-white/50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:italic prose-blockquote:font-serif
             prose-strong:font-bold prose-strong:text-editorial-text
-            prose-li:font-serif marker:prose-li:text-editorial-accent"
+            prose-li:font-sans-serif marker:prose-li:text-editorial-accent"
       >
         <Content />
       </div>
@@ -91,7 +91,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
         Enjoyed this essay?
       </h3>
       <p class="text-editorial-muted font-serif mb-8">
-        Join 15,000+ others receiving the Sunday Digest.
+        Join 200+ others receiving the Sunday Digest.
       </p>
       <form class="flex gap-4">
         <input

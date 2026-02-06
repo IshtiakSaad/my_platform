@@ -1,6 +1,6 @@
 ---
-title: "Wanna Get Rich & Wildly Succesful? Read these 5 Books, Lean these 7 habits and Go hell at your all 48 crushes. Now!"
-description: "Why silence is the most powerful answer to noise."
+title: "Wanna Get Rich & Wildly Succesful? Read these 5 Books, Learn these 7 habits and Go hell at your all 48 crushes. Now!"
+description: "A critique of hustle-culture fantasies, YouTube-guru delusions, and the deeper psychological forces driving young people toward empty definitions of “success."
 category: "Philosophy"
 pubDate: 2023-04-10
 draft: false

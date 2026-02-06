@@ -1,6 +1,6 @@
 ---
-title: "Decoding the Psychology Behind Steve Rogers' Battle Against Past Self in Avengers: Endgame"
-description: "Why silence is the most powerful answer to noise."
+title: "Decoding the Psychology of Steve Rogers' Battle Against Past Self in Avengers: Endgame"
+description: "A psychological breakdown of Steve Rogers’ confrontation with his past self and what it reveals about identity, regret, and growth."
 category: "Psychology"
 pubDate: 2023-03-11
 draft: false
@@ -13,6 +13,8 @@ In Endgame, you might see it as just an attempt to add a little flair to the tim
 In my observation, our identity lags behind our experiences by two years (plus or minus six months). Meaning if you're Justin Beiber and became famous when you were a teenager, then by the time you hit your 20s, you'd realize that constantly being chased by media and gossip magazines all day isn't what you'd want. You had the same experiences as a teenager, but you didn't realize the consequences they would have on your identity. You surfed on them; meanwhile, they became a part of your identity, and now you hate yourself.
 
 Now let's put Steve Rogers into two archetypes: Captain America Steve Rogers, a World War II super soldier. A righteous man who lost his best friend, went into a deep sleep for almost seventy years and woke up in a world where everyone he knew was gone. And then we have the Avenger Steve Rogers, who operates on a different battlefield than in 1942. The line between good and evil is so volatile and ambiguous that Captain America Steve Rogers failed to navigate it. A new lens was needed to observe the world, and that's the inception of Avenger Steve Rogers. Smarter and wiser than the World War II super soldier.
+
+![](https://i0.wp.com/beforesandafters.com/wp-content/uploads/2019/05/CapvCap-e1557913128833.jpg?w=1524&ssl=1)
 
 
 Now let's go back to the fight scene. 

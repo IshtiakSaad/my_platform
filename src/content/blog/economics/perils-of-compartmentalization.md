@@ -1,6 +1,6 @@
 ---
 title: "Downside of Keeping Everything Confidential: How Segway Turned A Disaster."
-description: "Keeping everything confidential won’t lead to growth."
+description: "How Segway’s secrecy-obsessed culture blocked feedback, created internal silos, and turned a revolutionary idea into a commercial failure"
 category: "Economics"
 pubDate: 2023-08-19
 draft: false
