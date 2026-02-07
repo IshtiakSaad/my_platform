@@ -7,10 +7,8 @@ export async function getStaticPaths() {
     return data.draft !== true;
   });
 
-  // Get all unique categories
   const uniqueCategories = [...new Set(allPosts.map((post) => post.data.category))];
 
-  // Map categories to descriptions (Optional: You can customize these)
   const descriptions = {
     'Tech': "The architecture of our new reality.",
     'Psychology': "Understanding the ghost in the machine.",
@@ -19,13 +17,8 @@ export async function getStaticPaths() {
   };
 
   return uniqueCategories.map((category) => {
-    // Create a slug for the URL (e.g., "Tech" -> "tech")
     const slug = category.toLowerCase();
-    
-    // Filter posts for this specific category
     const categoryPosts = allPosts.filter((post) => post.data.category === category);
-    
-    // Sort by date (newest first)
     const sortedPosts = categoryPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
     return {
@@ -41,78 +34,77 @@ export async function getStaticPaths() {
 
 const { categoryName, posts, description } = Astro.props;
 
-// Isolate the newest post for the "Hero" slot
 const featuredPost = posts[0];
 const remainingPosts = posts.slice(1);
 ---
 
 <BaseLayout title={`${categoryName} - Ishtiak Saad`}>
   
-  <section class="py-20 border-b border-editorial-border mb-16">
-    <div class="grid grid-cols-12 gap-8 items-end">
+  <section class="py-16 md:py-20 border-b border-editorial-border mb-12 md:mb-16">
+    <div class="grid grid-cols-12 gap-6 md:gap-8 items-end">
       <div class="col-span-12 lg:col-span-8">
-        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted mb-4 block">
+        <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-editorial-muted mb-3 sm:mb-4 block">
             Collection
         </span>
-        <h1 class="text-6xl md:text-8xl font-serif font-bold text-editorial-text tracking-tight capitalize">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-serif font-bold text-editorial-text tracking-tight capitalize leading-tight">
           {categoryName}
         </h1>
       </div>
-      <div class="col-span-12 lg:col-span-4 lg:pb-2">
-        <p class="text-xl md:text-2xl text-editorial-muted font-light italic font-serif leading-relaxed border-l border-editorial-accent pl-6">
+      <div class="col-span-12 lg:col-span-4 lg:pb-2 mt-6 lg:mt-0">
+        <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-editorial-muted font-light italic font-serif leading-relaxed border-l-0 sm:border-l border-editorial-accent pl-0 sm:pl-6">
           {description}
         </p>
       </div>
     </div>
   </section>
 
-  <section class="pb-32">
+  <section class="pb-20 md:pb-32">
     
     {featuredPost && (
-        <article class="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-b border-editorial-border/30 pb-16">
+        <article class="mb-16 md:mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start border-b border-editorial-border/30 pb-12 md:pb-16">
             <div class="col-span-12 lg:col-span-8">
                 <a href={`/posts/${featuredPost.slug}`} class="group block">
-                    <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-4 font-sans">
+                    <div class="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-3 md:mb-4 font-sans">
                         <span>{featuredPost.data.pubDate.toLocaleDateString()}</span>
-                        <span class="w-1 h-[1px] bg-editorial-border"></span>
-                        <span>Latest Essay</span>
+                        <span class="hidden md:inline w-1 h-[1px] bg-editorial-border"></span>
+                        <span class="bg-yellow-300 text-black px-2 py-1">Latest Essay</span>
                     </div>
-                    <h2 class="text-2xl md:text-4xl uppercase font-sans font-bold text-editorial-text group-hover:text-editorial-text/70 transition-colors mb-6 leading-tight">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase font-sans font-bold text-editorial-text group-hover:text-editorial-text/70 transition-colors mb-4 md:mb-6 leading-tight">
                         {featuredPost.data.title}
                     </h2>
-                    <p class="text-xl text-editorial-muted font-sans leading-relaxed max-w-3xl">
+                    <p class="text-base sm:text-lg md:text-xl text-editorial-muted font-sans leading-relaxed max-w-full md:max-w-3xl">
                         {featuredPost.data.description}
                     </p>
-                    <div class="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-editorial-text group-hover:text-editorial-accent transition-colors font-sans">
+                    <div class="mt-6 md:mt-8 flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest text-editorial-text group-hover:text-editorial-accent transition-colors font-sans">
                         Read Article <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </div>
                 </a>
             </div>
-            <div class="hidden lg:block lg:col-span-4 border border-editorial-border p-8 bg-white h-full">
-                <span class="text-6xl font-serif text-editorial-border/50 font-bold">01</span>
-                <div class="mt-auto pt-12">
-                     <p class="text-xs font-bold uppercase tracking-widest text-editorial-muted mb-2">Reading Time</p>
-                     <p class="font-serif italic text-lg">8 Minutes</p>
+            <div class="hidden lg:flex lg:flex-col lg:col-span-4 border border-editorial-border p-6 md:p-8 bg-white h-full">
+                <span class="text-5xl md:text-6xl font-serif text-editorial-border/50 font-bold">01</span>
+                <div class="mt-auto pt-8 md:pt-12">
+                     <p class="text-xs font-bold uppercase tracking-widest text-editorial-muted mb-1 md:mb-2">Reading Time</p>
+                     <p class="font-serif italic text-base md:text-lg">8 Minutes</p>
                 </div>
             </div>
         </article>
     )}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12 gap-y-12 sm:gap-y-16 lg:gap-y-20">
       {remainingPosts.map((post) => (
         <article class="flex flex-col group h-full justify-between">
           <div>
-            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-4 font-sans">
+            <div class="flex items-center justify-between text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-editorial-muted mb-2 sm:mb-4 font-sans">
                 <time>{post.data.pubDate.toLocaleDateString()}</time>
             </div>
             
             <a href={`/posts/${post.slug}`} class="block">
-              <h3 class="text-3xl font-sans font-bold text-editorial-text group-hover:underline decoration-1 underline-offset-4 decoration-editorial-accent mb-4 leading-snug">
+              <h3 class="text-2xl sm:text-2xl md:text-3xl lg:text-3xl font-sans font-bold text-editorial-text group-hover:underline decoration-1 underline-offset-4 decoration-editorial-accent mb-3 sm:mb-4 leading-snug">
                 {post.data.title}
               </h3>
             </a>
             
-            <p class="text-editorial-muted font-sans text-sm leading-relaxed line-clamp-3">
+            <p class="text-sm sm:text-sm md:text-base text-editorial-muted font-sans leading-relaxed line-clamp-3">
               {post.data.description}
             </p>
           </div>
@@ -121,8 +113,8 @@ const remainingPosts = posts.slice(1);
     </div>
 
     {remainingPosts.length === 0 && !featuredPost && (
-        <div class="py-20 text-center border border-dashed border-editorial-border">
-            <p class="text-editorial-muted font-serif italic text-xl">Coming soon...</p>
+        <div class="py-16 md:py-20 text-center border border-dashed border-editorial-border">
+            <p class="text-lg sm:text-xl md:text-xl text-editorial-muted font-serif italic">Coming soon...</p>
         </div>
     )}
 
