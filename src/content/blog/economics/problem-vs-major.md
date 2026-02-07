@@ -8,23 +8,21 @@ draft: false
 
 If you’ve read the headlines lately, you might think AI is about to make your college degree useless. Majors are vanishing, they say. “Your computer science degree? Dead.” “Psychology? Obsolete.” “Art history? Forget it.”
 
-Stop. That’s not how reality works. That’s the media telling a story that sells clicks. The truth? Majors aren’t dying. The problems they solve are evolving. And that distinction changes everything.
-
-The question isn’t which majors will remain relevant or which majors will perish. The question is what problems will disappear and what new class of problems will appear.
+Stop. That’s not how reality works. That’s the media telling a story that sells clicks. The truth? Majors aren’t dying. The problems they solve are evolving. The question isn’t which majors will remain relevant or which majors will perish. The question is what problems will disappear and what new class of problems will appear.
 
 When a problem class disappears, any major tied to solving it collapses, regardless of how “prestigious” it once was. When a new class emerges, entire job categories materialize out of nothing. Jobs exist because certain problems are expensive, unsolved, or impossible to automate. When those conditions change, new classes of problems arrive, the job landscape shifts.
 
 ## The Real Contract Behind Majors
 
-Here’s the unspoken deal: a major is a promise. Employers, society, your own future self—they trust that this bundle of knowledge and skills can solve a certain class of problems. Implicitly, a Computer Science degree solves computational problems. A Mechanical Engineering degree solves design and production problems.
+Here’s the unspoken deal: a major is a promise. Employers, society, your own future self... they trust that this bundle of knowledge and skills can solve a certain class of problems. Implicitly, a Computer Science degree solves computational problems. A Mechanical Engineering degree solves design and production problems.
 
-When that promise is broken—when the tasks your major equips you for are automated, outsourced, or simply no longer needed—that’s when majors stumble. Not because the degree itself is flawed. Not because the discipline isn’t “relevant.” Because the problem it was built to solve has disappeared, or changed. And that's what we're missing our here!
+When that promise is broken, when the tasks your major equips you for are automated, outsourced, or simply no longer needed, that’s when majors stumble. Not because the degree itself is flawed. Not because the discipline isn’t “relevant.” Because the problem it was built to solve has disappeared, or changed. And that's what we're missing our here!
 
 ## Majors as Task Bundles: A Conceptual Framework
 
-Economists call this the task-based framework. Jobs aren’t static titles; they’re collections of tasks tied to problems. That's how modern economics frames it. Nobel Laureate Acemoglu & Restrepo (2019) explain that technology doesn’t destroy jobs—it destroys or creates tasks. technology can displace labor-intensive tasks (“displacement effect”) while simultaneously creating complementary tasks where human labor retains comparative advantage (“reinstatement effect”). In this view, the demand for a major depends NOT on its intrinsic curriculum, but on whether its task content addresses current economic problems.
+Economists call this the task-based framework. Jobs aren’t static titles; they’re collections of tasks tied to problems. That's how modern economics frames it. Nobel Laureate Acemoglu & Restrepo (2019) explain that technology doesn’t destroy jobs; it destroys or creates tasks. technology can displace labor-intensive tasks (“displacement effect”) while simultaneously creating complementary tasks where human labor retains comparative advantage (“reinstatement effect”). In this view, the demand for a major depends NOT on its intrinsic curriculum, but on whether its task content addresses current economic problems.
 
-James Bessen’s work adds nuance: automation often reallocates labor into new, higher-value tasks rather than eliminating it outright [2][3]. So when AI automates a part of your field, it’s not the major dying—it’s the tasks shifting. Your major still matters if you can pivot to solve the new problems. These findings underscore that a major’s value emerges from its problem-solving capacity, not its label.
+James Bessen’s work adds nuance: automation often reallocates labor into new, higher-value tasks rather than eliminating it outright [2][3]. So when AI automates a part of your field, it’s not the major dying, it’s the tasks shifting. Your major still matters if you can pivot to solve the new problems. These findings underscore that a major’s value emerges from its problem-solving capacity, not its label.
 
 ## When Majors and Jobs Transform
 
