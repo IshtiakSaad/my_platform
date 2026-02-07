@@ -1,22 +1,30 @@
 ---
-title: "Education, Majors, and Problem-Driven Labor Markets"
+title: "Stop Freaking Out About AI Killing Majors or Taking Your Job."
 description: "When a problem class disappears, any major tied to solving it collapses, regardless of how “prestigious” it once was."
 category: "Economics"
 pubDate: 2026-02-07
 draft: false
 ---
 
+If you’ve read the headlines lately, you might think AI is about to make your college degree useless. Majors are vanishing, they say. “Your computer science degree? Dead.” “Psychology? Obsolete.” “Art history? Forget it.”
+
+Stop. That’s not how reality works. That’s the media telling a story that sells clicks. The truth? Majors aren’t dying. The problems they solve are evolving. And that distinction changes everything.
+
 The question isn’t which majors will remain relevant or which majors will perish. The question is what problems will disappear and what new class of problems will appear.
 
 When a problem class disappears, any major tied to solving it collapses, regardless of how “prestigious” it once was. When a new class emerges, entire job categories materialize out of nothing. Jobs exist because certain problems are expensive, unsolved, or impossible to automate. When those conditions change, new classes of problems arrive, the job landscape shifts.
 
-The value of a university major is not inherent; it exists only in the context of the problems that the major is designed to solve. Judging the relevance of a field of study purely by its name, prestige, or historical popularity is misleading. Majors are bundles of tasks, knowledge, and skills that have real-world utility only when aligned with active problem classes. As societal, technological, and economic problems evolve, so too does the relevance of academic programs.
+## The Real Contract Behind Majors
+
+Here’s the unspoken deal: a major is a promise. Employers, society, your own future self—they trust that this bundle of knowledge and skills can solve a certain class of problems. Implicitly, a Computer Science degree solves computational problems. A Mechanical Engineering degree solves design and production problems.
+
+When that promise is broken—when the tasks your major equips you for are automated, outsourced, or simply no longer needed—that’s when majors stumble. Not because the degree itself is flawed. Not because the discipline isn’t “relevant.” Because the problem it was built to solve has disappeared, or changed. And that's what we're missing our here!
 
 ## Majors as Task Bundles: A Conceptual Framework
 
-Modern labor economics frames work as a collection of tasks that address specific problems. Acemoglu and Restrepo (2019) introduce a task-based perspective: technology can displace labor-intensive tasks (“displacement effect”) while simultaneously creating complementary tasks where human labor retains comparative advantage (“reinstatement effect”) [1]. In this view, the demand for a major depends not on its intrinsic curriculum, but on whether its task content addresses current economic problems.
+Economists call this the task-based framework. Jobs aren’t static titles; they’re collections of tasks tied to problems. That's how modern economics frames it. Nobel Laureate Acemoglu & Restrepo (2019) explain that technology doesn’t destroy jobs—it destroys or creates tasks. technology can displace labor-intensive tasks (“displacement effect”) while simultaneously creating complementary tasks where human labor retains comparative advantage (“reinstatement effect”). In this view, the demand for a major depends NOT on its intrinsic curriculum, but on whether its task content addresses current economic problems.
 
-Bessen (2020) shows that automation initially increased employment in some industries, as falling costs spurred demand, but later led to declines once markets saturated [2]. Similarly, Bessen (2016) finds that computerization reallocates labor into new tasks rather than eliminating occupations outright [3]. These findings underscore that a major’s value emerges from its problem-solving capacity, not its label.
+James Bessen’s work adds nuance: automation often reallocates labor into new, higher-value tasks rather than eliminating it outright [2][3]. So when AI automates a part of your field, it’s not the major dying—it’s the tasks shifting. Your major still matters if you can pivot to solve the new problems. These findings underscore that a major’s value emerges from its problem-solving capacity, not its label.
 
 ## When Majors and Jobs Transform
 
@@ -36,7 +44,7 @@ Novel societal and technological challenges create new problem classes, spawning
 - **Cross-disciplinary majors**: Modern employers increasingly prioritize skills over credentials. For example, AI system designers draw from computer science, statistics, and ethics, prompting universities to create integrated programs [5][2].
 - **Vocational curricula and technology adoption**: Evidence from Switzerland shows that adding new technology skills to vocational programs accelerated firm-level adoption of innovations, demonstrating how curricula can translate problem-solving into measurable impact [5].
 
-These cases reinforce the principle that **majors are reactive, not proactive**; their relevance depends on alignment with emergent problems.
+These didn’t exist 30 years ago. New problem classes emerged, and academia scrambled to create majors and programs that could solve them [5]. Notice the pattern: problems appear first; majors follow. These cases reinforce the principle that **majors are reactive, not proactive**; their relevance depends on alignment with emergent problems.
 
 ## Limits of Major-Centric Forecasting
 
@@ -44,14 +52,21 @@ Relying on degrees alone to predict labor-market outcomes is flawed. Empirical s
 
 ## Implications for Education and Workforce Planning
 
+Here’s the part most articles skip: graduates often end up in jobs unrelated to their majors. Studies in Europe show pervasive mismatch between degree and employment [6]. Why? Because predicting future problem classes is hard, and curricula lag reality. Conzelmann et al. (2024) show universities take years to respond to new problem classes, even when demand is obvious [7].
+
 1. **Problem-Driven Relevance**: Majors are valuable only when they provide skills for active problem classes. Task-based labor models show that automation and technological change shift demand not by credential but by task relevance [1][2][3].
 2. **Dynamic Curriculum Adaptation**: Universities must anticipate problem evolution and update programs proactively. Historical and contemporary evidence shows that curricula lag behind technological and societal change [5][7].
 3. **Cross-Disciplinary and Skill-Based Focus**: Emerging problem classes often require knowledge that spans multiple traditional majors. Educational programs that integrate skills across disciplines are more resilient to labor-market shifts [5][2].
 4. **Cautious Forecasting**: Predicting future employment based solely on existing majors is misleading. Effective workforce planning must track problem-class evolution rather than degree output [6][7].
 
-## Conclusion
+## The Takeaway
 
-University majors are not inherently valuable. Their relevance depends entirely on the existence and persistence of the problems they are designed to solve. Historical examples—from telegraphy and bookkeeping to modern AI and cybersecurity—demonstrate that majors emerge, adapt, or vanish in response to problem-class dynamics. To remain relevant, educational programs must align with evolving societal and economic problems, embrace cross-disciplinary skill integration, and anticipate emerging challenges rather than rely on legacy prestige or static curriculum.
+1. **Stop fearing the death of majors.** They evolve with the problems they solve.
+2. **Majors are bundles of tasks, not magic.** Their value is entirely context-dependent.
+3. **Watch problems, not degrees.** Emerging challenges are where opportunity—and new majors—will appear.
+4. **Adapt.** The people who thrive aren’t clinging to their old task-bundles; they’re repackaging them for the problems that exist today.
+
+Majors aren’t vanishing. The world is just rewriting the syllabus. If you want to future-proof yourself, forget obsessing over the degree name and start obsessing over the problems you can actually solve.
 
 ---
 
