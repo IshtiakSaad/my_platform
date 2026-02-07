@@ -26,13 +26,9 @@ const { title } = Astro.props;
 
     <style>
       .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       }
-      /* Smooth underline animation */
+      /* Smooth Hover Underline */
       .link-underline {
         text-decoration-line: underline;
         text-decoration-color: transparent;
@@ -41,15 +37,22 @@ const { title } = Astro.props;
         transition: text-decoration-color 0.3s ease;
       }
       .group:hover .link-underline {
-        text-decoration-color: #fac638;
+        text-decoration-color: #fac638; /* Primary Yellow */
+      }
+      
+      /* Hide scrollbar when menu is open */
+      body.menu-open {
+        overflow: hidden;
       }
     </style>
   </head>
   <body
     class="bg-background-light text-editorial-text antialiased min-h-screen flex flex-col selection:bg-primary/30"
   >
+  
     <header
-      class="w-full px-6 py-6 md:px-12 lg:px-20 flex items-center justify-between border-b border-editorial-border sticky top-0 bg-background-light/95 backdrop-blur-md z-50"
+      class="w-full px-6 py-6 md:px-12 lg:px-20 flex items-center justify-between border-b border-editorial-border sticky top-0 bg-background-light/95 backdrop-blur-md z-50 transition-transform duration-300"
+      id="main-header"
     >
       <div class="flex items-center gap-8">
         <a
@@ -58,87 +61,130 @@ const { title } = Astro.props;
         >
           Ishtiak Saad
         </a>
-        <div
-          class="hidden lg:flex items-center gap-6 pl-8 border-l border-editorial-border"
-        >
-          <a
-            href="/archive"
-            class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-amber-500 transition-colors"
-            >Articles</a
-          >
-          <a
-            href="/about"
-            class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-amber-500 transition-colors"
-            >About</a
-          >
-          <a
-            href="/newsletter"
-            class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-amber-500 transition-colors"
-            >Newsletter</a
-          >
-        </div>
+
+        <nav class="hidden lg:flex items-center gap-6 pl-8 border-l border-editorial-border">
+          <a href="/archive" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors">Archive</a>
+          <a href="/about" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors">About</a>
+          <a href="/newsletter" class="text-[10px] font-bold uppercase tracking-[0.25em] text-editorial-muted hover:text-primary transition-colors">Newsletter</a>
+        </nav>
       </div>
+
       <div class="flex items-center gap-6">
-        <button
-          id="open-search"
-          class="hidden md:flex items-center gap-2 group text-editorial-muted hover:text-editorial-text transition-colors"
-        >
-          <span
-            class="text-[10px] font-bold uppercase tracking-widest hidden lg:block"
-            >Search</span
-          >
-          <span
-            class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors"
-            >search</span
-          >
+        <button id="open-search" class="hidden md:flex items-center gap-2 group text-editorial-muted hover:text-editorial-text transition-colors">
+          <span class="text-[10px] font-bold uppercase tracking-widest hidden lg:block">Search</span>
+          <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">search</span>
         </button>
-        <button class="md:hidden text-editorial-text">
-          <span class="material-symbols-outlined">menu</span>
+
+        <button id="mobile-menu-open" class="md:hidden text-editorial-text p-1">
+          <span class="material-symbols-outlined text-3xl">menu</span>
         </button>
       </div>
     </header>
 
-    <div class="bg-gray-100">
-      <main
-        class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20"
-      >
-        <slot />
-      </main>
+    <div 
+        id="mobile-menu" 
+        class="fixed inset-0 bg-white z-[100] flex flex-col translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+    >
+        <div class="px-6 py-6 flex items-center justify-between border-b border-editorial-border">
+            <span class="text-2xl font-serif font-bold text-editorial-text opacity-50">Menu</span>
+            <button id="mobile-menu-close" class="text-editorial-text p-1 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-4xl">close</span>
+            </button>
+        </div>
+
+        <div class="flex-grow overflow-y-auto px-6 py-12 flex flex-col gap-8">
+            
+            <nav class="flex flex-col gap-6">
+                <a href="/" class="text-4xl font-serif font-bold text-editorial-text hover:text-primary transition-colors">Home</a>
+                <a href="/archive" class="text-4xl font-serif font-bold text-editorial-text hover:text-primary transition-colors">Articles</a>
+                <a href="/about" class="text-4xl font-serif font-bold text-editorial-text hover:text-primary transition-colors">About</a>
+                <a href="/newsletter" class="text-4xl font-serif font-bold text-editorial-text hover:text-primary transition-colors">Newsletter</a>
+            </nav>
+
+            <div class="w-12 h-[1px] bg-editorial-border my-2"></div>
+
+            <div class="flex flex-col gap-4">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">Categories</span>
+                <a href="/technology" class="text-xl font-serif text-editorial-muted hover:text-editorial-text transition-colors">Technology</a>
+                <a href="/philosophy" class="text-xl font-serif text-editorial-muted hover:text-editorial-text transition-colors">Philosophy</a>
+                <a href="/psychology" class="text-xl font-serif text-editorial-muted hover:text-editorial-text transition-colors">Psychology</a>
+                <a href="/economics" class="text-xl font-serif text-editorial-muted hover:text-editorial-text transition-colors">Economics</a>
+            </div>
+
+             <div class="w-12 h-[1px] bg-editorial-border my-2"></div>
+
+            <button id="mobile-search-trigger" class="flex items-center gap-3 text-left group">
+                <span class="material-symbols-outlined text-2xl text-editorial-muted group-hover:text-primary transition-colors">search</span>
+                <span class="text-lg font-serif text-editorial-muted group-hover:text-editorial-text transition-colors">Search Archives</span>
+            </button>
+        </div>
+
+        <div class="px-6 py-8 border-t border-editorial-border bg-white/50">
+             <div class="flex gap-8">
+                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">Twitter</a>
+                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">LinkedIn</a>
+                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">RSS</a>
+            </div>
+        </div>
     </div>
 
-    <footer class="w-full border-t border-editorial-border py-16 bg-white">
-      <div
-        class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-8"
-      >
+    <main class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+       <slot />
+    </main>
+
+    <footer class="w-full border-t border-editorial-border py-16 bg-white mt-auto">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-8">
         <div class="flex flex-col gap-2 text-center md:text-left">
-          <span class="text-xl font-serif font-bold text-editorial-text"
-            >Ishtiak Saad</span
-          >
-          <p
-            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted"
-          >
-            © 2026. All rights reserved.
-          </p>
+          <span class="text-xl font-serif font-bold text-editorial-text">Ishtiak Saad</span>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted">© 2026. All rights reserved.</p>
         </div>
         <div class="flex gap-10">
-          <a
-            href="#"
-            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
-            >Twitter</a
-          >
-          <a
-            href="#"
-            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
-            >LinkedIn</a
-          >
-          <a
-            href="#"
-            class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors"
-            >RSS</a
-          >
+          <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">Twitter</a>
+          <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">LinkedIn</a>
+          <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-editorial-muted hover:text-primary transition-colors">RSS</a>
         </div>
       </div>
     </footer>
+
     <SearchModal />
+
+    <script>
+      // 1. Mobile Menu Logic
+      const menuOpenBtn = document.getElementById('mobile-menu-open');
+      const menuCloseBtn = document.getElementById('mobile-menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      const toggleMenu = (show) => {
+        if (show) {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.classList.add('menu-open'); // Locks scroll
+        } else {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.classList.remove('menu-open'); // Unlocks scroll
+        }
+      };
+
+      if (menuOpenBtn && menuCloseBtn) {
+          menuOpenBtn.addEventListener('click', () => toggleMenu(true));
+          menuCloseBtn.addEventListener('click', () => toggleMenu(false));
+      }
+
+      // 2. Mobile Search Logic (Connects the mobile button to the Search Modal)
+      const mobileSearchTrigger = document.getElementById('mobile-search-trigger');
+      const searchModal = document.getElementById('search-modal'); // Assumed ID from SearchModal.astro
+      
+      if (mobileSearchTrigger && searchModal) {
+          mobileSearchTrigger.addEventListener('click', () => {
+              // Close mobile menu first
+              toggleMenu(false);
+              // Small delay to allow menu to slide out before modal slides in
+              setTimeout(() => {
+                  searchModal.classList.remove('hidden');
+                  const input = searchModal.querySelector('input');
+                  if(input) input.focus();
+              }, 300);
+          });
+      }
+    </script>
   </body>
 </html>
