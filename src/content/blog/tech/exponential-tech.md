@@ -1,6 +1,6 @@
 ---
 title: "Enter Exponential Technologies. Yes, It’s Got Something to Do with AI."
-description: "Why silence is the most powerful answer to noise."
+description: "A breakdown of exponential growth, why companies like Kodak never saw it coming, and why AI sits on the same curve."
 category: "Tech"
 pubDate: 2023-02-09
 draft: false

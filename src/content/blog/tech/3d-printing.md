@@ -1,6 +1,6 @@
 ---
 title: "How We’re Shaping Our future: The Origins and Power of Additive Manufacturing."
-description: "Why silence is the most powerful answer to noise."
+description: "The rise of 3-D printing and how it’s redefining manufacturing on Earth and beyond."
 category: "Tech"
 pubDate: 2022-12-20
 draft: false

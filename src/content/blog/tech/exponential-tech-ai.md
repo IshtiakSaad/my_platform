@@ -1,6 +1,6 @@
 ---
 title: "AI’s Ruthless Capabilities Breeds from Its Root in Exponential Technology."
-description: "Why silence is the most powerful answer to noise."
+description: "Why modern AI feels sudden: the math, the dark ages, and the breakthroughs."
 category: "Tech"
 pubDate: 2023-02-16
 draft: false
